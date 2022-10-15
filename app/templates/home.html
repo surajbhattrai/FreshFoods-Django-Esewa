@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<main class="offcanvas-enabled" style="padding-top: 5rem;">
+    <section class="ps-lg-4 pe-lg-3 pt-4">
+
+        <div class="px-3 pt-2">
+
+            <div>
+                <div class="rounded-3 px-md-5 text-center text-xl-start" style="background-color: #59c879;">
+                    <div class="d-xl-flex justify-content-between align-items-center px-4 px-sm-5 mx-auto"
+                        style="max-width: 1226px;">
+                        <div class="py-5 me-xl-4 mx-auto mx-xl-0" style="max-width: 490px;">
+                            <h2 class="h1 text-light">Fresh Foods a Click Away</h2>
+                            <p class="text-light pb-4">Order any goods from our store online and we deliver them to your
+                                door at
+                                a time convenient for you.</p>
+                            <h5 class="text-light pb-3">On the go? Try our mobile app</h5>
+                            <div class="d-flex flex-wrap justify-content-center justify-content-xl-start"><a
+                                    class="btn-market btn-apple me-2 mb-2" href="#" role="button"><span
+                                        class="btn-market-subtitle">Download on the</span><span
+                                        class="btn-market-title">App
+                                        Store</span></a><a class="btn-market btn-google mb-2" href="#"
+                                    role="button"><span class="btn-market-subtitle">Download on the</span><span
+                                        class="btn-market-title">Google
+                                        Play</span></a></div>
+                        </div>
+                        <div>
+                            <img src="{% static 'img/grocery/slider/slide01.jpg' %}" alt="Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- How it works-->
+            <section class="pt-4 mb-4 mb-md-5">
+                <h2 class="h3 text-center mb-grid-gutter pt-2">How it works?</h2>
+                <div class="row g-0 bg-light rounded-3">
+                    <div class="col-xl-4 col-lg-12 col-md-4 border-end">
+                        <div class="py-3">
+                            <div class="d-flex align-items-center mx-auto py-3 px-3" style="max-width: 362px;">
+                                <div class="display-3 fw-normal opacity-15 me-4">01</div>
+                                <div class="ps-2"><img class="d-block my-2"
+                                        src="{% static 'img/grocery/steps/01.png' %}" width="72" alt="Order online">
+                                    <p class="mb-3 pt-1">You order your favorite products online</p>
+                                </div>
+                            </div>
+                            <hr class="d-md-none d-lg-block d-xl-none">
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-12 col-md-4 border-end">
+                        <div class="py-3">
+                            <div class="d-flex align-items-center mx-auto py-3 px-3" style="max-width: 362px;">
+                                <div class="display-3 fw-normal opacity-15 me-4">02</div>
+                                <div class="ps-2"><img class="d-block my-2"
+                                        src="{% static 'img/grocery/steps/02.png' %}" width="72"
+                                        alt="Grocery collected">
+                                    <p class="mb-3 pt-1">We collects the products from your list</p>
+                                </div>
+                            </div>
+                            <hr class="d-md-none d-lg-block d-xl-none">
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-12 col-md-4">
+                        <div class="py-3">
+                            <div class="d-flex align-items-center mx-auto py-3 px-3" style="max-width: 362px;">
+                                <div class="display-3 fw-normal opacity-15 me-4">03</div>
+                                <div class="ps-2"><img class="d-block my-2"
+                                        src="{% static 'img/grocery/steps/03.png' %}" width="72" alt="Delivery">
+                                    <p class="mb-3 pt-1">We deliver to the door at a time convenient for you</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="pt-5 pb-4">
+                <!-- Heading-->
+                <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
+                    <h2 class="h3 mb-0 pt-3 me-3">Popular Products</h2>
+                    <div class="pt-3"><a class="btn btn-outline-accent btn-sm" href="{%url 'store'%}">More products<i
+                                class="ci-arrow-right ms-1 me-n1"></i></a></div>
+                </div>
+
+
+
+                <div class="row">
+                    {% for product in products %}
+
+                    <div class="col-md-3">
+
+                        <div class="card product-card card-static mb-5 rounded shadow">
+
+                            <a class="card-img-top d-block overflow-hidden" href="{%url 'product-detail' product.id%}">
+                                <img src="{{product.image.url}}" alt="Product">
+                            </a>
+
+                            <div class="card-body py-3 rounded">
+                                <a class="product-meta d-block fs-xs pb-1" href="#">{{product.category}}</a>
+
+                                <h3 class="product-title fs-sm text-truncate ">
+                                    <a href="{%url 'product-detail' product.id%}">{{product.product_name}}</a>
+                                </h3>
+
+                                <div class="product-price">
+                                    <span class="text-accent">Rs. {{product.price}}</span>
+                                </div>
+
+                            </div>
+
+                            <div class="product-floating-btn">
+                                <button class="btn btn-primary btn-shadow btn-sm" type="button">+<i
+                                        class="ci-cart fs-base ms-1"></i></button>
+                            </div>
+                            
+                        </div>
+
+
+
+
+                        {% comment %} <span>
+
+                            <i class="fa fa-star{%if product.avarageReview < 0.5%}-o{%elif product.avarageReview >= 0.5 and product.avarageReview < 1 %}-half-o{%endif%}"
+                                aria-hidden="true"></i>
+                            <i class="fa fa-star{%if product.avarageReview < 1.5%}-o{%elif product.avarageReview >= 1.5 and product.avarageReview < 2 %}-half-o{%endif%}"
+                                aria-hidden="true"></i>
+                            <i class="fa fa-star{%if product.avarageReview < 2.5%}-o{%elif product.avarageReview >= 2.5 and product.avarageReview < 3 %}-half-o{%endif%}"
+                                aria-hidden="true"></i>
+                            <i class="fa fa-star{%if product.avarageReview < 3.5%}-o{%elif product.avarageReview >= 3.5 and product.avarageReview < 4 %}-half-o{%endif%}"
+                                aria-hidden="true"></i>
+                            <i class="fa fa-star{%if product.avarageReview < 4.5%}-o{%elif product.avarageReview >= 4.5 and product.avarageReview < 5 %}-half-o{%endif%}"
+                                aria-hidden="true"></i>
+
+                        </span> {% endcomment %}
+
+                    </div>
+                    {% endfor %}
+
+
+                </div>
+
+
+
+            </section>
+
+            <div class="pb-3"></div>
+        </div>
+
+    </section>
+</main>
+
+
+{% endblock content %}

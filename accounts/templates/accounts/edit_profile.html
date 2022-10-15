@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<main class="offcanvas-enabled" style="padding-top: 5rem;">
+
+    <section class="ps-lg-4 pe-lg-3 pt-4">
+    {% include 'accounts/alert.html' %}
+    <div class="container">
+        <div class="row">
+            {% include 'accounts/dashbord_sidebar.html' %}
+
+            <main class="col-md-9">
+                <article class="card">
+                    <header class="card-header">
+                        <strong class="d-inline-block mr-3">Edit Your Profile:</strong>
+
+                    </header>
+                    <div class="card-body">
+                        <div class="text-right">
+                            <img src="{{userprofile.profile_pic.url}}" alt="Profile Pic" width="100"
+                                style="border-radius: 50px;">
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <form action="{%url 'edit_profile'%}" method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="form row">
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label">First Name</label>
+                                            {{user_form.first_name}}
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label">Last Name</label>
+                                            {{user_form.last_name}}
+                                        </div>
+                                    </div>
+                                    <div class="form row">
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label">Phone Number</label>
+                                            {{user_form.phone_number}}
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label">Profile Picture</label>
+                                            {{profile_form.profile_pic}}
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Address Line 1</label>
+                                        {{profile_form.address_line_1}}
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Address Line 2</label>
+                                        {{profile_form.address_line_2}}
+                                    </div>
+                                    <div class="form row">
+                                        <div class="mb-3 col-md-4">
+                                            <label class="form-label">city</label>
+                                            {{profile_form.city}}
+                                        </div>
+                                        <div class="mb-3 col-md-4">
+                                            <label class="form-label">state</label>
+                                            {{profile_form.state}}
+                                        </div>
+                                        <div class="mb-3 col-md-4">
+                                            <label class="form-label">Country</label>
+                                            {{profile_form.country}}
+                                        </div>
+                                    </div>
+                                    <input type="submit" class="btn btn-primary" value="save">
+                                </form>
+
+                            </div>
+                        </div> <!-- row.// -->
+                    </div> <!-- card-body .// -->
+                    <!-- table-responsive .end// -->
+                </article> <!-- order-group.// -->
+            </main>
+        </div> <!-- row.// -->
+    </div>
+
+
+</section>
+
+<main/>
+
+{% endblock content %}

@@ -1,0 +1,55 @@
+<aside class="offcanvas offcanvas-expand w-100 border-end zindex-lg-5 pt-lg-5" id="sideNav"
+        style="max-width: 21.875rem;">
+        <div class="pt-2 d-none d-lg-block">
+
+        </div>
+
+        <ul class="nav nav-tabs mt-4 mt-lg-5 mb-0" role="tablist" style="min-height: 3rem;">
+                <li class="nav-item">
+                        <a class="nav-link fw-medium active" href="#categories" data-bs-toggle="tab"
+                                role="tab">Categories</a>
+                </li>
+        </ul>
+
+        <div class="offcanvas-body px-0 pt-3 pb-0" data-simplebar>
+                <div class="sidebar-nav tab-pane fade show active" id="categories" role="tabpanel">
+
+                        {% for i in links %}
+                        <div class="border-bottom">
+                                <a href="{% url 'store' %}?category={{i.category_name}}"
+                                        class="nav-link-style d-block fs-md fw-normal py-3 px-grid-gutter">
+                                        <span class="d-flex align-items-center">
+                                                <i class="ci-bread fs-lg opacity-60 mt-n1 me-2">
+                                                </i>{{i.category_name}}
+                                        </span>
+                                </a>
+                        </div>
+                        {% endfor %}
+
+                </div>
+
+        </div>
+
+
+
+        <div class="offcanvas-footer d-block px-grid-gutter pt-4 pb-4 mb-2">
+                <div class="d-flex mb-3"><i class="ci-support h4 mb-0 fw-normal text-primary mt-1 me-1"></i>
+                        <div class="ps-2">
+                                <div class="text-muted fs-sm">Support</div><a class="nav-link-style fs-md"
+                                        href="tel:+9876543210">+977 9876543210</a>
+                        </div>
+                </div>
+                <div class="d-flex mb-3"><i class="ci-mail h5 mb-0 fw-normal text-primary mt-1 me-1"></i>
+                        <div class="ps-2">
+                                <div class="text-muted fs-sm">Email</div><a class="nav-link-style fs-md"
+                                        href="mailto:customer@example.com">surajbh71@gmail.com</a>
+                        </div>
+                </div>
+                <h6 class="pt-2 pb-1">Follow us</h6><a class="btn-social bs-outline bs-twitter me-2 mb-2" href="#"><i
+                                class="ci-twitter"></i></a><a class="btn-social bs-outline bs-facebook me-2 mb-2"
+                        href="#"><i class="ci-facebook"></i></a><a class="btn-social bs-outline bs-instagram me-2 mb-2"
+                        href="#"><i class="ci-instagram"></i></a><a class="btn-social bs-outline bs-youtube me-2 mb-2"
+                        href="#"><i class="ci-youtube"></i></a>
+        </div>
+
+</aside>

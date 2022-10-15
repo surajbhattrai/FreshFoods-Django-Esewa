@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<main class="offcanvas-enabled" style="padding-top: 8em;">
+
+    <section class="section-pagetop bg ps-lg-4 pe-lg-3 pt-4"">
+        <div class="container">
+
+            {% if request.GET.q %}
+            <h2 class="title-page">Search results for "{{request.GET.q}}".</h2>
+            {% elif request.GET.category %}
+            <h2 class="title-page">{{request.GET.category}}</h2>
+            {% else %}
+            <h2 class="title-page">Our Store</h2>
+            {% endif %}
+
+        </div>
+
+        <div class="container">
+
+            <header class="border-bottom mb-4 pb-3">
+                <div class="form-inline">
+                    <span class="mr-md-auto">{{products_count}} Items found </span>
+
+                </div>
+            </header>
+
+
+            <div class="row">
+                {% for product in products %}
+
+                <div class="col-md-3">
+
+                    <div class="card product-card card-static mb-3">
+
+                        <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
+                            data-bs-placement="left" title="Add to wishlist"><i class="ci-heart"></i></button>
+
+                        <a class="card-img-top d-block overflow-hidden" href="{%url 'product-detail' product.id%}">
+                            <img src="{{product.image.url}}" alt="Product">
+                        </a>
+
+                        <div class="card-body py-3">
+                            <a class="product-meta d-block fs-xs pb-1" href="#">{{product.category}}</a>
+
+                            <h3 class="product-title fs-sm text-truncate ">
+                                <a href="{%url 'product-detail' product.id%}">{{product.product_name}}</a>
+                            </h3>
+
+                            <div class="product-price">
+                                <span class="text-accent">Rs. {{product.price}}</span>
+                            </div>
+
+                        </div>
+
+                        <div class="product-floating-btn">
+                            <button class="btn btn-primary btn-shadow btn-sm" type="button">+<i
+                                    class="ci-cart fs-base ms-1"></i></button>
+                        </div>
+                    </div>
+
+
+
+
+                    {% comment %} <span>
+
+                        <i class="fa fa-star{%if product.avarageReview < 0.5%}-o{%elif product.avarageReview >= 0.5 and product.avarageReview < 1 %}-half-o{%endif%}"
+                            aria-hidden="true"></i>
+                        <i class="fa fa-star{%if product.avarageReview < 1.5%}-o{%elif product.avarageReview >= 1.5 and product.avarageReview < 2 %}-half-o{%endif%}"
+                            aria-hidden="true"></i>
+                        <i class="fa fa-star{%if product.avarageReview < 2.5%}-o{%elif product.avarageReview >= 2.5 and product.avarageReview < 3 %}-half-o{%endif%}"
+                            aria-hidden="true"></i>
+                        <i class="fa fa-star{%if product.avarageReview < 3.5%}-o{%elif product.avarageReview >= 3.5 and product.avarageReview < 4 %}-half-o{%endif%}"
+                            aria-hidden="true"></i>
+                        <i class="fa fa-star{%if product.avarageReview < 4.5%}-o{%elif product.avarageReview >= 4.5 and product.avarageReview < 5 %}-half-o{%endif%}"
+                            aria-hidden="true"></i>
+
+                    </span> {% endcomment %}
+
+                </div>
+                {% endfor %}
+
+
+            </div>
+        </div>
+        
+    </section>
+
+</main>
+
+{% endblock content %}

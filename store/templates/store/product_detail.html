@@ -1,0 +1,245 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+
+<main class="offcanvas-enabled" style="padding-top: 5rem;">
+	<section class="ps-lg-4 pe-lg-3 pt-4">
+		<div class="px-3 pt-2">
+
+			<section class="row g-0 mx-n2 pb-5 mb-xl-3">
+				<div class="col-xl-7 px-2 mb-3">
+					<div class="h-100 bg-light rounded-3 p-4">
+
+						<div class="product-gallery">
+							<div class="product-gallery-preview order-sm-2">
+								{% for m in product_galary %}
+								<div class="product-gallery-preview-item {% if forloop.first %}active{% endif %} "
+									id="image{{ forloop.counter }}">
+									<img src="{{m.image.url}}" alt="Product image">
+								</div>
+								{% endfor %}
+							</div>
+							<div class="product-gallery-thumblist order-sm-1">
+								{% for m in product_galary %}
+								<a class="product-gallery-thumblist-item active" href="#image{{ forloop.counter }}">
+									<img src="{{m.image.url}}" alt="Product thumb">
+								</a>
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-5 px-2 mb-3">
+					<div class="h-100 bg-light rounded-3 py-5 px-4 px-sm-5"><a class="product-meta d-block fs-sm pb-2"
+							href="#">{{object.category}}</a>
+						<h1 class="h2">{{object.product_name}}</h1>
+
+						<div>
+							<div class="star-rating">
+								<i
+									class="star-rating-icon ci-star-filled {% if object.avarageReview >= 1 %}active{%endif%}"></i>
+								<i
+									class="star-rating-icon ci-star-filled {% if object.avarageReview >= 2 %}active{%endif%}"></i>
+								<i
+									class="star-rating-icon ci-star-filled {% if object.avarageReview >= 3 %}active{%endif%}"></i>
+								<i
+									class="star-rating-icon ci-star-filled {% if object.avarageReview >= 4 %}active{%endif%}"></i>
+								<i
+									class="star-rating-icon ci-star-filled {% if object.avarageReview == 5 %}active{%endif%}"></i>
+							</div>
+							<span class="d-inline-block fs-sm text-white opacity-70 align-middle mt-1 ms-1">
+								({{object.countReview}}) reviews
+							</span>
+						</div>
+
+
+
+						<div class="h2 fw-normal text-accent pt-3">Rs. {{object.price}}</div>
+
+
+
+						<div class="d-flex flex-wrap align-items-center pt-4 pb-2 mb-3">
+							<select class="form-select me-3 mb-3" style="width: 5rem;">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+							</select>
+
+							<form action="{%url 'add-cart' product.id%}" method="GET">
+								<button class="btn btn-primary btn-shadow me-3 mb-3" type="submit"><i
+										class="ci-cart fs-lg me-2"></i>Add to Cart</button>
+							</form>
+
+
+						</div>
+						<h6>Product description</h6>
+
+						{{object.description}}
+
+					</div>
+				</div>
+			</section>
+
+			<section class="pb-5 mb-2 mb-xl-4">
+				<h2 class="h3 pb-2 mb-grid-gutter text-center">You may also like</h2>
+
+				<div class="row">
+					{% for product in all_products %}
+
+					<div class="col-md-2">
+
+						<div class="card product-card card-static mb-3">
+
+							<button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
+								data-bs-placement="left" title="Add to wishlist"><i class="ci-heart"></i></button>
+
+							<a class="card-img-top d-block overflow-hidden" href="{%url 'product-detail' product.id%}">
+								<img src="{{product.image.url}}" alt="Product">
+							</a>
+
+							<div class="card-body py-3">
+								<a class="product-meta d-block fs-xs pb-1" href="#">{{product.category}}</a>
+
+								<h3 class="product-title fs-sm text-truncate ">
+									<a href="{%url 'product-detail' product.id%}">{{product.product_name}}</a>
+								</h3>
+
+								<div class="product-price">
+									<span class="text-accent">Rs. {{product.price}}</span>
+								</div>
+
+							</div>
+
+							<div class="product-floating-btn">
+								<button class="btn btn-primary btn-shadow btn-sm" type="button">+<i
+										class="ci-cart fs-base ms-1"></i></button>
+							</div>
+						</div>
+
+
+
+
+
+					</div>
+					{% endfor %}
+
+
+				</div>
+
+			</section>
+		</div>
+
+
+		<div class="row py-4">
+			<div class="col-md-7">
+
+
+			
+
+
+
+	
+				
+
+				{% for review in reviews %}
+				<div class="product-review pb-4 mb-4 border-bottom">
+					<div class="d-flex mb-3">
+						<div class="d-flex align-items-center me-4 pe-2"><img class="rounded-circle"
+								src="img/shop/reviews/01.jpg" width="50" alt="Rafael Marquez">
+							<div class="ps-3">
+								<h5 class="fs-sm mb-0">{{review.user.full_name}}</h5><span class="fs-ms text-muted">{{review.updated_at}}</span>
+							</div>
+						</div>
+						<div>
+							<div>
+								<div class="star-rating">
+									<i class="star-rating-icon ci-star-filled {% if review.rating >= 1 %}active{%endif%}"></i>
+									<i class="star-rating-icon ci-star-filled {% if review.rating >= 2 %}active{%endif%}"></i>
+									<i class="star-rating-icon ci-star-filled {% if review.rating >= 3 %}active{%endif%}"></i>
+									<i class="star-rating-icon ci-star-filled {% if review.rating >= 4 %}active{%endif%}"></i>
+									<i class="star-rating-icon ci-star-filled {% if review.rating == 5 %}active{%endif%}"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<h6>{{review.subject}}</h6>
+					<p class="fs-md mb-2">{{review.review}}</p>
+				</div>
+				{% endfor %}
+
+				<div class="text-center">
+					<button class="btn btn-outline-accent" type="button"><i class="ci-reload me-2"></i>Load more
+						reviews</button>
+				</div>
+
+			</div>
+
+			<div class="col-md-5 mt-2 pt-4 mt-md-0 pt-md-0">
+				<div class="bg-secondary py-grid-gutter px-grid-gutter rounded-3">
+					<h3 class="h4 pb-2">Write a review</h3>
+
+					<form action="{%url 'submit_reviews' object.id%}" method="POST">
+						{% csrf_token %}
+						<div>
+							
+							<div class="mb-3">
+								<label class="form-label" for="subject">Review Title
+									<span class="text-danger">*</span>
+								</label>
+								<input class="form-control" type="text" name="subject" id="subject">
+							</div>
+
+							<div class="mb-3">
+								<label class="form-label" for="review-rating">Rating<span
+										class="text-danger">*</span></label>
+								<select class="form-select" required="" id="review-rating" name="rating">
+									<option value="">Choose rating</option>
+									<option value="5">5 stars</option>
+									<option value="4">4 stars</option>
+									<option value="3">3 stars</option>
+									<option value="2">2 stars</option>
+									<option value="1">1 star</option>
+								</select>
+								<div class="invalid-feedback">Please choose rating!</div>
+							</div>
+
+							<div class="mb-3">
+								<label class="form-label" for="review-text">Review<span class="text-danger">*</span></label>
+								<textarea name="review" class="form-control" rows="6" required="" id="review-text"></textarea>
+							</div>
+			
+							<br>
+							{% if user.is_authenticated %}
+							{% if orderproduct %}
+							<button class="btn btn-primary btn-shadow d-block w-100" type="submit">Submit a Review</button>
+							{%else%}
+							<p>User must purchase the product to make a review.</p>
+			
+							{% endif %}
+
+							{%else%}
+							<p>User must be logged in to make a review <span><a href="{%url 'login'%}">login</a></span>
+							</p>
+							{% endif %}
+			
+			
+						</div>
+						{% include "accounts/alert.html" %}
+					</form>
+
+					
+				</div>
+			</div>
+		</div>
+
+
+	</section>
+</main>
+
+
+
+{% endblock content %}

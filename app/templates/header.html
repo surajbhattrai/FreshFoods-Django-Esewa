@@ -1,0 +1,89 @@
+{% load static %}
+
+{% comment %} 
+<a href="{%url 'store'%}" class="btn btn-outline-primary">Store</a>
+{% endcomment %}
+
+
+<header class="bg-light shadow-sm fixed-top" data-fixed-element>
+    <div class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+
+            <!-- <a class="navbar-brand d-none d-sm-block me-3 me-xl-4 flex-shrink-0"
+                href="{%url 'home'%}">
+            </a> -->
+
+            <a class="navbar-brand  me-2" href="{%url 'home'%}">
+                <h3>Cartzilla</h3>
+            </a>
+
+            <form class="input-group d-none d-lg-flex flex-nowrap mx-4" action="{% url 'store' %}" class="search" style="width:60%;">
+                <i class="ci-search position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+                <input name="q" class="form-control rounded-start w-100" type="text" placeholder="Search for products" value={{request.GET.q}}>
+                <select name="category" class="form-select flex-shrink-0" style="width: 14rem;">
+                    
+                    {% if request.GET.category %}
+                    <option>{{request.GET.category}}</option>
+                    {% else %}
+                    <option>All Category</option>
+                    {% endif %}
+
+                    {% for i in links %}
+                    <option value="{{i.category_name}}">{{i.category_name}}</option>
+                    {% endfor %}
+                </select>
+            </form>
+
+            <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center ms-xl-2">
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sideNav"><span
+                        class="navbar-toggler-icon"></span></button><a class="navbar-tool d-flex d-lg-none"
+                    href="#searchBox" data-bs-toggle="collapse" role="button" aria-expanded="false"
+                    aria-controls="searchBox"><span class="navbar-tool-tooltip">Search</span>
+                    <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-search"></i></div>
+                </a>
+
+
+                {% if user.is_authenticated %}
+
+                <div class="navbar-tool me-3">
+                    <a class="navbar-tool-icon-box bg-secondary"
+                        href="{%url 'cart'%}"><span class="navbar-tool-label">{{cart_count}}</span><i
+                            class="navbar-tool-icon ci-cart"></i>
+                    </a>
+                </div>
+
+                <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="{%url 'dashbord'%}">
+                    <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user"></i></div>
+                    <div class="navbar-tool-text ms-n3"><small>Hello, {{request.user}}!</small>Go to Dashboard</div>
+                </a>
+
+                <a class="btn btn-sm btn-danger rounded-1 ms-lg-4 ms-2" href="{%url 'logout'%}">Logout</a>
+
+                {%else%}
+
+                <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="{%url 'login'%}">
+                    <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user"></i></div>
+                    <div class="navbar-tool-text ms-n3"><small>Hello, Sign in</small>My Account</div>
+                </a>
+
+                {% endif %}
+
+
+
+
+            </div>
+        </div>
+    </div>
+    <!-- Search collapse-->
+    <div class="collapse" id="searchBox">
+        <div class="card pt-2 pb-4 border-0 rounded-0">
+            <div class="container">
+                <div class="input-group"><i
+                        class="ci-search position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+                    <input class="form-control rounded-start" type="text" placeholder="Search for products">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</header>

@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<main class="offcanvas-enabled" style="padding-top: 5rem;">
+    <section class="ps-lg-4 pe-lg-3 pt-4">
+
+
+        <div class="card mx-auto" style="max-width:520px; margin-top:40px;">
+            <article class="card-body">
+                {% include 'accounts/alert.html' %}
+                <header class="mb-4">
+                    <h4 class="card-title">Sign up</h4>
+                </header>
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <div class="row">
+                        <div class="col mb-3">
+                            <label class="form-label">First name</label>
+                            {{form.first_name}}
+                        </div> <!-- mb-3 end.// -->
+                        <div class="col mb-3">
+                            <label class="form-label">Last name</label>
+                            {{form.last_name}}
+                        </div> <!-- mb-3 end.// -->
+                    </div> <!-- row end.// -->
+
+
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">Emaill Adress</label>
+                            {{form.email}}
+                            <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div> <!-- mb-3 end.// -->
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">Phone Number</label>
+                            {{form.phone_number}}
+                        </div> <!-- mb-3 end.// -->
+                    </div> <!-- row.// -->
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">Create password</label>
+                            {{form.password}}
+                        </div> <!-- mb-3 end.// -->
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">Repeat password</label>
+                            {{form.confirm_password}}
+                        </div> <!-- mb-3 end.// -->
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary btn-block"> Register </button>
+                    </div> <!-- mb-3// -->
+                    {{form.email.errors}}
+                    {{form.non_field_errors}}
+                </form>
+            </article><!-- card-body.// -->
+        </div> <!-- card .// -->
+        <p class="text-center mt-4">Have an account? <a href="{%url 'login'%}">Log In</a></p>
+        <br><br>
+
+
+    </section>
+
+</main>
+{% endblock content %}
