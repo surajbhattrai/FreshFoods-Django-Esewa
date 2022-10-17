@@ -1,14 +1,8 @@
-
-
 from pathlib import Path
 import os
-import smtplib
 
-from email.mime.text import MIMEText
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
 SECRET_KEY = 'django-insecure-ec65z229mhfzv8ofg4+jfwy2*bh+tdkold5&((tc7$8+5k!sh-'
 DEBUG = True
 ALLOWED_HOSTS = ['*']
@@ -42,7 +36,7 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
-ROOT_URLCONF = 'course.urls'
+ROOT_URLCONF = 'project.urls'
 
 TEMPLATES = [
     {
@@ -62,7 +56,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'course.wsgi.application'
+WSGI_APPLICATION = 'project.wsgi.application'
 AUTH_USER_MODEL = 'app.Account'
 
 
@@ -74,20 +68,7 @@ DATABASES = {
 }
 
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
+AUTH_PASSWORD_VALIDATORS = []
 
 
 LANGUAGE_CODE = 'en-us'
@@ -107,14 +88,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/meida/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'meida')
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com.'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'pythonmacaulay@gmail.com'
-DEFAULT_FROM_EMAIL = 'pythonmacaulay@gmail.com'
-EMAIL_HOST_PASSWORD = 'beejayMac1'
-EMAIL_USE_TLS = True
 
 from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {

@@ -3,7 +3,7 @@
         <div class="pt-2 d-none d-lg-block">
 
         </div>
-
+ 
         <ul class="nav nav-tabs mt-4 mt-lg-5 mb-0" role="tablist" style="min-height: 3rem;">
                 <li class="nav-item">
                         <a class="nav-link fw-medium active" href="#categories" data-bs-toggle="tab"
@@ -19,7 +19,7 @@
                                 <a href="{% url 'store' %}?category={{i.category_name}}"
                                         class="nav-link-style d-block fs-md fw-normal py-3 px-grid-gutter">
                                         <span class="d-flex align-items-center">
-                                                <i class="ci-bread fs-lg opacity-60 mt-n1 me-2">
+                                                <i class="{{i.icon}} fs-lg opacity-60 mt-n1 me-2">
                                                 </i>{{i.category_name}}
                                         </span>
                                 </a>

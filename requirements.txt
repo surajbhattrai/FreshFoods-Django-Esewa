@@ -33,3 +33,4 @@ urllib3==1.25.8
 webencodings==0.5.1
 djangorestframework
 whitenoise
+python-decouple

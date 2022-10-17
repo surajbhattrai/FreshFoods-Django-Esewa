@@ -4,6 +4,7 @@ from .models import Category
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['category_name','slug']
+    list_display = ['category_name','icon','slug']
+    list_editable = ['icon']
     prepopulated_fields = {'slug':('category_name',)}
 admin.site.register(Category,CategoryAdmin) 

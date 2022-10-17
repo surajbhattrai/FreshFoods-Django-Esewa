@@ -14,20 +14,35 @@
 
 						<div class="product-gallery">
 							<div class="product-gallery-preview order-sm-2">
-								{% for m in product_galary %}
-								<div class="product-gallery-preview-item {% if forloop.first %}active{% endif %} "
-									id="image{{ forloop.counter }}">
-									<img src="{{m.image.url}}" alt="Product image">
+
+								<div class="product-gallery-preview-item active" id="image1">
+									<img src="{{object.image.url}}" alt="Product image">
 								</div>
-								{% endfor %}
+
+								<div class="product-gallery-preview-item" id="image2">
+									<img src="https://itk-assets.nyc3.cdn.digitaloceanspaces.com/2020/03/grocery-delivery-services.jpg" alt="Product image">
+								</div>
+
+								<div class="product-gallery-preview-item" id="image3">
+									<img src="https://food-ubc.b-cdn.net/wp-content/uploads/2020/02/Save-Money-On-Groceries_UBC-Food-Services.jpg" alt="Product image">
+								</div>
+
 							</div>
+
 							<div class="product-gallery-thumblist order-sm-1">
-								{% for m in product_galary %}
-								<a class="product-gallery-thumblist-item active" href="#image{{ forloop.counter }}">
-									<img src="{{m.image.url}}" alt="Product thumb">
+								<a class="product-gallery-thumblist-item active" href="#image1">
+									<img src="{{object.image.url}}"  alt="Product thumb">
 								</a>
-								{% endfor %}
+
+								<a class="product-gallery-thumblist-item" href="#image2" >
+									<img src="https://itk-assets.nyc3.cdn.digitaloceanspaces.com/2020/03/grocery-delivery-services.jpg" alt="Product thumb" style="height:80px; object-fit:cover;">
+								</a>
+
+								<a class="product-gallery-thumblist-item" href="#image3">
+									<img src="https://food-ubc.b-cdn.net/wp-content/uploads/2020/02/Save-Money-On-Groceries_UBC-Food-Services.jpg" style="height:80px; object-fit:cover;" alt="Product thumb">
+								</a>
 							</div>
+
 						</div>
 					</div>
 				</div>
