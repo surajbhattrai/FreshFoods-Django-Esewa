@@ -3,18 +3,21 @@ from store.models import Product, ReviewRating
 from category.models import Category
 from .forms import ReviewForms
 from django.contrib import messages
-# Create your views here.
 
  
 def store(request, category_slug=None):
     categories = None
     products = None
+    products_count = None
     query = request.GET.get('q',None)
     category_query = request.GET.get('category',None)
     if category_query:
-        categories = get_object_or_404(Category, category_name=category_query)
-        products = Product.objects.filter(category=categories,is_available=True)
-        products_count = products.count()
+        try:
+            categories = Category.objects.get(category_name=category_query)
+            products = Product.objects.filter(category=categories,is_available=True)
+            products_count = products.count()
+        except:
+            pass
     elif query:
         products = Product.objects.filter(product_name__icontains=query)
         products_count = products.count()
@@ -22,8 +25,6 @@ def store(request, category_slug=None):
         products = Product.objects.all().filter(is_available=True)
         products_count  = products.count()
 
-        
-    
     context = {
         'products': products,
         'products_count' :products_count

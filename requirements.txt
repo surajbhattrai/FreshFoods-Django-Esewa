@@ -12,8 +12,6 @@ dj-database-url==0.5.0
 Django==3.2
 django-admin-thumbnails==0.2.5
 django-crispy-forms==1.11.2
-django-heroku==0.3.1
-gunicorn==20.1.0
 html5lib==1.0.1
 idna==2.8
 ipaddr==2.2.0
@@ -22,8 +20,6 @@ msgpack==0.6.2
 packaging==20.3
 pep517==0.8.2
 Pillow==8.2.0
-progress==1.5
-psycopg2==2.9.1
 pycodestyle==2.7.0
 pyparsing==2.4.6
 pytoml==0.1.21
@@ -35,3 +31,5 @@ sqlparse==0.4.1
 toml==0.10.2
 urllib3==1.25.8
 webencodings==0.5.1
+djangorestframework
+whitenoise

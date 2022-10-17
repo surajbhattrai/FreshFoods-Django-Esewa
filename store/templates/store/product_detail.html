@@ -89,9 +89,7 @@
 
 				<div class="row">
 					{% for product in all_products %}
-
-					<div class="col-md-2">
-
+					<div class="col-6 col-md-3">
 						<div class="card product-card card-static mb-3">
 
 							<button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
@@ -115,19 +113,12 @@
 							</div>
 
 							<div class="product-floating-btn">
-								<button class="btn btn-primary btn-shadow btn-sm" type="button">+<i
-										class="ci-cart fs-base ms-1"></i></button>
+								<a href="{% url 'add-cart' product.id %}" class="btn btn-primary btn-shadow btn-sm">+<i
+										class="ci-cart fs-base ms-1"></i></a>
 							</div>
 						</div>
-
-
-
-
-
 					</div>
 					{% endfor %}
-
-
 				</div>
 
 			</section>
@@ -137,12 +128,6 @@
 		<div class="row py-4">
 			<div class="col-md-7">
 
-
-			
-
-
-
-	
 				
 
 				{% for review in reviews %}

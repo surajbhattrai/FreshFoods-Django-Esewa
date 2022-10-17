@@ -5,13 +5,11 @@ from .models import Order, OrderProduct
 import datetime
 import json
 from django.http import JsonResponse
-from .models import Payment
 from store.models import Product
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage 
 from django.template.loader import render_to_string
 from django.views.generic import View
 from django.urls import reverse
-
 
 
 def payments(request):
@@ -44,15 +42,10 @@ def payments(request):
         product = Product.objects.get(id=item.product_id)
         product.stock -= item.quantity
         product.save()
-    CartItem.objects.filter(user=request.user).delete() 
+    CartItem.objects.filter(user=request.user).delete()
+
     # mail_subject = "Thank you for your order"
-    # message = render_to_string('orders/ordered_recive_email.html',{
-    #             'user': request.user,
-    #             'order': order,
-
-                
-
-    # })
+    # message = render_to_string('orders/ordered_recive_email.html',{'user': request.user,'order': order,})
     # to_email = request.user.email
     # send_email = EmailMessage(mail_subject,message,to=[to_email])
     # send_email.send()     
@@ -148,7 +141,6 @@ class EsewaRequestView(View):
             orderproduct.ordered = True
             orderproduct.save() 
             product = Product.objects.get(id=item.product_id)
-            product.stock -= item.quantity
             product.save() 
 
         context={"order":order}

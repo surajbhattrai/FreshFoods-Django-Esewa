@@ -3,22 +3,24 @@ from category.models import Category
 from app.models import Account
 from django.urls import reverse
 from django.db.models import Avg, Count
-# Create your models here.
+from django.template.defaultfilters import slugify
+
+from helper import unique_product_slug_generator
+from django.db.models.signals import pre_save
+
+
+
 
 class Product(models.Model):
     product_name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, unique=True)
     description = models.TextField(max_length=2000,blank=True)
     price = models.IntegerField()
-    image = models.ImageField(upload_to='products/photos')
-    stock = models.IntegerField()
+    image = models.ImageField(upload_to='products/photos',default="default.png")
     is_available = models.BooleanField(default=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     created_date  = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
-    
-    
-    
 
     class Meta:
         ordering = ('-created_date',)
@@ -31,7 +33,6 @@ class Product(models.Model):
         return avg
 
 
-
     def countReview(self):
          reviews = ReviewRating.objects.filter(product=self, status=True).aggregate(count=Count('id'))
          count = 0
@@ -42,8 +43,15 @@ class Product(models.Model):
 
     def get_url(self):
         return reverse('product_detail', args=[self.category.slug, self.slug])
+        
     def __str__(self):
         return self.product_name
+
+
+def product_pre_save_receiver(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = unique_product_slug_generator(instance)
+pre_save.connect(product_pre_save_receiver, sender=Product)
 
 
 class ReviewRating(models.Model):

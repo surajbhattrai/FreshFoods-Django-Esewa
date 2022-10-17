@@ -2,23 +2,16 @@ from django.shortcuts import render
 from store.models import Product, ReviewRating, ProductGalary
 from django.views.generic import  DetailView
 from orders.models import OrderProduct
+from django.http import JsonResponse
+from django.core.cache import cache
 
-
-# Create your views here.
 
 def home(request):
     products = Product.objects.all().filter(is_available=True)
-    for product in products:
-        
-        reviews  = ReviewRating.objects.filter(product_id=product.id, status=True)
-          
-
     context = {
         'products' : products,
-        'reviews': reviews,
     }
     return render(request, 'home.html',context)
-
 
 
 class ProductDetailView(DetailView):
@@ -28,7 +21,7 @@ class ProductDetailView(DetailView):
         context = super(ProductDetailView,self).get_context_data(**kwargs)
         context['reviews'] = ReviewRating.objects.filter(product_id=self.object.id, status=True)
         context['product_galary'] = ProductGalary.objects.filter(product_id=self.object.id)
-        context['all_products'] = Product.objects.all()[0:6]
+        context['all_products'] = Product.objects.all()[0:4]
 
         if self.request.user.is_authenticated:
             try:
