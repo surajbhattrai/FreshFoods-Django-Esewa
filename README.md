@@ -11,7 +11,7 @@ To get a local copy up and running follow these simple example steps.
 
 2. Clone the repo :
     ```sh
-     git clone https://github.com/1hanzla100/flutter-yumniastic
+     git clone https://github.com/surajbhattrai/FreshFoods-Django-Esewa.git
     ```
 3. (optional) Create and activate a [virtualenv](https://virtualenv.pypa.io/) (you may want to use [virtualenvwrapper](http://virtualenvwrapper.readthedocs.org/)).
 
